@@ -1,4 +1,5 @@
 import Image from "next/image";
+import AuthForm from "@/app/(site)/components/AuthForm";
 
 export default function Home() {
     return (
@@ -19,10 +20,10 @@ export default function Home() {
                 tracking-tight
                 text-gray-900
                 ">
-                    Giriş yapın yada kayıt olun
+                    hesabınıza giriş yapın
                 </h2>
             </div>
-        {/*  Auth Form  */}
+            <AuthForm/>
         </div>
     )
 }
