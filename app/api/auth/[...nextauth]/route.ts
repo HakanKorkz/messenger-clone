@@ -1,3 +1,4 @@
+// @ts-ignore
 import bcrypt from "bcrypt"
 import NextAuth, {AuthOptions} from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -7,17 +8,20 @@ import {PrismaAdapter} from "@next-auth/prisma-adapter";
 
 // @ts-ignore
 import prisma from "@/app/libs/prismadb";
-import exp from "constants";
 
 export const authOptions: AuthOptions = {
     adapter: PrismaAdapter(prisma),
     providers: [
         GithubProvider({
+            // @ts-ignore
             clientId: process.env.GITHUB_ID as String,
+            // @ts-ignore
             clientSecret: process.env.GITHUB_CLIENT_SCRET as String,
         }),
         GoogleProvider({
+            // @ts-ignore
             clientId: process.env.GOOGLE_CLIENT_ID as String,
+            // @ts-ignore
             clientSecret: process.env.GOOGLE_CLIENT_SCRET as String,
         }),
         CredentialsProvider({
