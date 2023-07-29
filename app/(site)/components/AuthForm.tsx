@@ -6,6 +6,8 @@ import Button from "@/app/components/Button";
 import AuthSocialButton from "@/app/(site)/components/AuthSocialButton";
 import {BsGithub, BsGoogle} from "react-icons/bs";
 import axios from "axios";
+import {toast} from "react-hot-toast";
+import {signIn} from "next-auth/react";
 
 type Variant = 'LOGIN' | 'REGISTER';
 const AuthForm = () => {
@@ -36,20 +38,45 @@ const AuthForm = () => {
         setIsLoading(true);
 
         if (variant === 'REGISTER') {
-            axios.post('/api/register', data).then(r => {
-                console.log(r)
-            })
+            axios.post('/api/register', data)
+                .catch(() => toast.error('Bir şeyler yanlış gitti!'))
+                .finally(() => setIsLoading(false));
+
+
         }
 
         if (variant === 'LOGIN') {
-            // NextAuth
+            signIn('credentials', {
+                ...data,
+                redirect: false
+            })
+                .then((callback)=>{
+                if (callback?.error) {
+                    toast.error('Geçersiz kimlik bilgileri')
+                }
+
+                if (callback?.ok && !callback?.error) {
+                    toast.success('Giriş!')
+                }
+            })
+                .finally(()=> setIsLoading(false))
         }
     }
 
     const socialAction = (action: string) => {
         setIsLoading(true)
 
-        // NextAuth Social
+        signIn(action,{redirect:false})
+            .then((callback)=>{
+                if (callback?.error) {
+                    toast.error('Geçersiz kimlik bilgileri')
+                }
+
+                if (callback?.ok && !callback?.error) {
+                    toast.success('Giriş!')
+                }
+            })
+            .finally(()=> setIsLoading(false))
 
     }
 
@@ -160,7 +187,7 @@ const AuthForm = () => {
                 >
                     <div>
                         {
-                            variant==="LOGIN" ? 'Messenger\'da yeni misiniz?' : 'Zaten hesabınız var mı?'
+                            variant === "LOGIN" ? 'Messenger\'da yeni misiniz?' : 'Zaten hesabınız var mı?'
                         }
 
                     </div>
@@ -171,7 +198,7 @@ const AuthForm = () => {
                         cursor-pointer
                         ">
                         {
-                            variant==='LOGIN' ? 'Hesap oluştur' : 'giriş yap'
+                            variant === 'LOGIN' ? 'Hesap oluştur' : 'giriş yap'
                         }
 
                     </div>
