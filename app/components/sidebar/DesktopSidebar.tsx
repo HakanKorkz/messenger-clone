@@ -11,7 +11,6 @@ interface DesktopSidebarProps {
 const DesktopSidebar:React.FC<DesktopSidebarProps> = ({currentUser}) => {
     const routes=useRoutes();
     const [isOpen,setIsOpen]=useState(false);
-    console.log(routes)
     return (
         <div
         className="
@@ -22,6 +21,7 @@ const DesktopSidebar:React.FC<DesktopSidebarProps> = ({currentUser}) => {
         lg:z-40
         lg:w-20
         xl:px-6
+        lg:overflow-y-auto
         lg:bg-white
         lg:border-r-[1px]
         lg:pb-4
