@@ -88,14 +88,14 @@ const ConversationBox: React.FC<ConversationBoxProps> = ({data, selected}) => {
                         ">
                             {data.name || otherUser.name}
                         </p>
-                        {lastMessage?.creadetAt && (
+                        {lastMessage?.createdAt && (
                             <p
                             className="
                             text-xs
                             text-gray-400
                             font-light
                             ">
-                                {format(new Date(lastMessage.creadetAt),'p',{
+                                {format(new Date(lastMessage.createdAt),'p',{
                                     locale:tr
                                 })}
                             </p>
