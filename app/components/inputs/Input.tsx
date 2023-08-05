@@ -31,6 +31,7 @@ const Input: React.FC<InputProps> = (
         // @ts-ignore
         name = id
     }
+
     return (
         <div>
             <label
@@ -40,6 +41,7 @@ const Input: React.FC<InputProps> = (
                 font-medium
                 leading-6
                "
+                // @ts-ignore
                 htmlFor={id}>
 
                 {
@@ -47,11 +49,15 @@ const Input: React.FC<InputProps> = (
                 }
             </label>
             <input
+                // @ts-ignore
                 id={id}
+                // @ts-ignore
                 name={"aa"}
                 type={type}
+                // @ts-ignore
                 autoComplete={id}
                 disabled={disabled}
+                // @ts-ignore
                 {...register(name, {required})}
                 className={clsx(`
                 form-input
