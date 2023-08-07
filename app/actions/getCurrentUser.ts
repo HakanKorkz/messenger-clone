@@ -6,7 +6,7 @@ const getCurrentUser = async () => {
         const session = await getSession();
 
         if (!session?.user?.email) {
-            console.log(session?.user?.email);
+            console.log(session?.user?.email,"currentUser_error_session");
 
             return null;
         }
@@ -18,7 +18,7 @@ const getCurrentUser = async () => {
         });
 
         if (!currentUser) {
-            console.log(currentUser);
+            console.log(currentUser,"currentUser_error_null");
 
             return null;
         }
@@ -26,7 +26,7 @@ const getCurrentUser = async () => {
         return currentUser;
 
     } catch (error: any) {
-        console.log(error);
+        console.log(error,"currentUser_error");
         return null;
     }
 }

@@ -7,7 +7,7 @@ import {HiPaperAirplane, HiPhoto} from "react-icons/hi2";
 import MessageInput from "@/app/conversations/[conversationId]/components/MessageInput";
 import {CldUploadButton} from "next-cloudinary";
 
-const MyComponent = () => {
+const Form = () => {
     const {conversationId} = useConversation();
 
     const {
@@ -86,4 +86,4 @@ const MyComponent = () => {
     );
 };
 
-export default MyComponent;
+export default Form;
