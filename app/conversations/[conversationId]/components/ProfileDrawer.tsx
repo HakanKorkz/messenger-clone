@@ -9,6 +9,7 @@ import Avatar from "@/app/components/Avatar";
 import {tr} from "date-fns/locale";
 import ConfirmModal from "@/app/conversations/[conversationId]/components/ConfirmModal";
 import AvatarGroup from "@/app/components/AvatarGroup";
+import useActiveList from "@/app/hooks/useActiveList";
 
 
 interface ProfileDrawerProps {
@@ -22,6 +23,8 @@ interface ProfileDrawerProps {
 const ProfileDrawer: React.FC<ProfileDrawerProps> = ({isOpen, data, onClose}) => {
     const otherUser = useOtherUser(data);
     const [confirmOpen, ConfirmOpen] = useState(false);
+    const {members} = useActiveList();
+    const isActive = members.indexOf(otherUser?.email!) !== -1;
     const joinedDate = useMemo(() => {
         return format(new Date(otherUser.createdAt), 'PP',{
             locale:tr
@@ -37,8 +40,8 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({isOpen, data, onClose}) =>
             return `${data.users.length} üyeler`;
         }
 
-        return 'Aktif';
-    }, [data.isGroup, data.users.length]);
+        return isActive ? 'Aktif' : 'Pasif';
+    }, [data.isGroup, data.users.length, isActive]);
     
     const isDrawerOpen= useMemo(() => {
         return (!confirmOpen && isOpen);
