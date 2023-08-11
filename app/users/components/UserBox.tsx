@@ -12,7 +12,6 @@ interface UserBoxProps {
 
 
 const UserBox: React.FC<UserBoxProps> = ({data}) => {
-    console.log(data)
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
 
